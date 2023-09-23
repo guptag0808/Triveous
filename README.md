@@ -1,236 +1,86 @@
-E-Commerce-triveous
-Endpoints
-User Routes
-POST user/register
-Register a new user.
 
-Request Body:
+Certainly! You can create a single table for your README.md file with all the endpoints and details in one place. Here's the complete table:
+
+markdown
+Copy code
+# E-Commerce-triveous API Documentation
+
+This document provides information about the endpoints available in the E-Commerce-triveous API.
+
+## User Routes
+
+| Method | Endpoint           | Description                    | Request Body                            | Response                |
+| ------ | ------------------ | ------------------------------ | --------------------------------------- | ----------------------- |
+| POST   | /user/register     | Register a new user            | See Request Body Example below          | Status: 201 Created     |
+|        |                    |                                |                                       | Body: { "message": "User is Registered" } |
+| POST   | /user/login        | Login with existing user credentials | See Request Body Example below     | Status: 201 Created     |
+|        |                    |                                |                                       | Body: { "token": "your_jwt_token", "message": "Login Successfull" } |
+
+**Request Body Example for User Routes**:
+
+```json
 {
   "name": "John Doe",
   "email": "john@example.com",
-  "password": "password123",
-}
-Response:
-Status: 201 Created
-
-Body:{ "message": "User is Registered" }
-
-POST user/login
-Login with existing user credentials.
-
-Request Body:
-{
-  "email": "john@example.com",
   "password": "password123"
 }
-Response:
-Status: 201 Created
-
-Body:
-{
-  "token": "your_jwt_token",
-  "message": "Login Successfull"
-}
 Category Routes
-Create a new category.
-POST /category/create
-Request Body:
+Method	Endpoint	Description	Request Body	Response
+POST	/category/create	Create a new category	See Request Body Example below	Status: 201 Created
+Body: { "message": "Category added successfully" }
+GET	/category/getall	Get all categories		Status: 200 OK
+Body: Array of Categories
+Request Body Example for Category Routes:
+
+json
+Copy code
 {
   "name": "mobile"
 }
-Response:
-Status: 201 Created
-
-Body:
-{
-  "message": "Category added successfully"
-}
-GET /category/getall
-Get all categories.
-
-Response:
-Status: 200 OK Body:
-
-  [
-  {
-    "_id": "category_id",
-    "name": "mobile"
-  },
-  {
-    "_id": "category_id",
-    "name": "laptop"
-  },
-  ...
-  ]
 Product Routes
-POST /product/create
-Create a new product.
+Method	Endpoint	Description	Request Body	Response
+POST	/product/create	Create a new product	See Request Body Example below	Status: 201 Created
+Body: { "message": "Product added successfully" }
+GET	/:categoryId	Get all products by category ID		Status: 200 OK
+Body: Array of Products
+GET	/product/productsId/:productsId	Get a specific product by ID		Status: 200 OK
+Body: Product Details
+Request Body Example for Product Routes:
 
-Request Body:
-
-  {
-    "title": "oppo",
-    "description": "camera phone",
-    "price": 9500,
-    "availability": true,
-    "categoryId": "category_id"
-  }
-Response:
-
-Status: 201 Created Body:
-
-  {
-    "message": "Product added successfully"
-  }
-GET /:categoryId
-Get all products under a specific category.
-
-Response:
-
-Status: 200 OK Body:
-
-    [
-      {
-        "_id": "product_id",
-        "title": "oppo",
-        "description": "camera phone",
-        "price": 9500,
-        "availability": true,
-        "categoryId": "category_id"
-      },
-      {
-        "_id": "product_id",
-        "title": "redmi",
-        "description": "durable phone",
-        "price":10500,
-        "availability": false,
-        "categoryId": "category_id"
-      },
-      ...
-    ]
-GET product/productsId/:productsId
-Get a specific product by its ID.
-
-Response:
-
-Status: 200 OK Body:
-
-      {
-        "_id": "product_id",
-        "title": "oppo",
-        "description": "camera phone",
-        "price": 9500,
-        "availability": true,
-        "categoryId": "category_id"
-      }
+json
+Copy code
+{
+  "title": "oppo",
+  "description": "camera phone",
+  "price": 9500,
+  "availability": true,
+  "categoryId": "category_id"
+}
 Cart Routes
-GET /cart/getAll/:userID
-Get all data from the user's cart.
+Method	Endpoint	Description	Request Body	Response
+GET	/cart/getAll/:userID	Get all data from user's cart		Status: 200 OK
+Body: Cart Details
+POST	/cart/add	Add a product to the cart	See Request Body Example below	Status: 200 OK
+Body: { "message": "Product added to cart successfully" }
+PATCH	/cart/:productId	Update the quantity of a product in the cart	See Request Body Example below	Status: 200 OK
+Body: { "message": "Cart item is updated now" }
+DELETE	/cart/delete/:productId	Delete an item from the cart		Status: 200 OK
+Body: { "message": "Cart item is deleted now" }
+Request Body Example for Cart Routes:
 
-Response:
-
-Status: 200 OK Body:
-
-    {
-      "_id": "cart_id",
-      "userId": "user_id",
-      "items": [
-        {
-          "_id": "item_id",
-          "productId": "product_id",
-          "quantity": 2,
-          "price": 9500
-        },
-        ...
-      ]
-    }
-POST /cart/add
-Add a product to the cart.
-
-Response:
-
-Status: 200 OK Body:
-
-{ "message": "Product added to cart successfully" }
-
-PATCH /cart/:productId
-Update the quantity of a product in the cart.
-
-Request Body:
-
-    {
-      "quantity": 3
-    }
-Response:
-
-Status: 200 OK Body:
-
-    {
-      "message": "Cart item is updated now"
-    }
-DELETE /cart/delete/:productId
-Delete an item from the cart.
-
-Response:
-
-Status: 200 OK Body:
-
-  {
-    "message": "cart item is deleted now"
-  }
+json
+Copy code
+{
+  "userId": "user_id",
+  "productId": "product_id",
+  "quantity": 2,
+  "price": 9500
+}
 Order Routes
-POST /:productId
-Place an order for a specific product.
-
-Response:
-
-Status: 201 OK Body:
-
-  {
-    "message": "order is placed now"
-  }
-GET /order/order-history
-Get the order history for the authenticated user.
-
-Response:
-
-Status: 200 OK Body:
-
-  [
-    {
-      "_id": "order_id",
-      "userId": "user_id",
-      "items": [
-        {
-          "_id": "item_id",
-          "productId": "product_id",
-          "quantity": 2
-        },
-        ...
-      ],
-      "totalPrice": 19000,
-      "date": "2023-07-26T10:15:00.000Z"
-    },
-    ...
-  ]
-GET /:orderId
-Get detailed information of a specific order by its ID.
-
-Response:
-
-Status: 200 OK Body:
-
-  {
-    "_id": "order_id",
-    "userId": "user_id",
-    "items": [
-      {
-        "_id": "item_id",
-        "productId": "product_id",
-        "quantity": 2
-      },
-      ...
-    ],
-    "totalPrice":19000,
-    "date": "2023-07-26T10:15:00.000Z"
-  }
+Method	Endpoint	Description	Request Body	Response
+POST	/:productId	Place an order for a specific product		Status: 201 Created
+Body: { "message": "order is placed now" }
+GET	/order/order-history	Get the order history for the authenticated user		Status: 200 OK
+Body: Array of Order Details
+GET	/:orderId	Get detailed information of a specific order by its ID		Status: 200 OK
+Body: Order Details
