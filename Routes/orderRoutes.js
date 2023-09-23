@@ -43,4 +43,40 @@ orderRouter.post('/place', async (req, res) => {
   }
 });
 
+// Track the order By Order ID
+
+    orderRouter.get('/:orderId', async (req, res) => {
+  const orderId = req.params.orderId;
+
+  try {
+    const order = await OrderModel.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+
+    res.status(200).json(order);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Fatch All oredrs for authenticated user
+  orderRouter.get('/orders/history', async (req, res) => {
+  const userId = req.body.userId; 
+  // consolelog(userId)
+    try {
+    const orders = await OrderModel.find({ userId }).sort({ createdAt: 'desc' });
+
+    if (!orders || orders.length === 0) {
+      return res.status(404).json({ error: 'No order history found' });
+    }
+
+    res.status(200).json(orders);
+  } catch (error) { 
+    console.log(error.message)
+    // res.status(500).json({ error: 'Internal server error',"err":error.message });
+  }
+});
+
 module.exports = {orderRouter};
