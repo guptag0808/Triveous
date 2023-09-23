@@ -1,7 +1,9 @@
 ## Register a New User
 
 **Method**: POST
+
 **Endpoint**: /api/user/register
+
 **Description**: Register a new user.
 
 ### Request
@@ -24,7 +26,9 @@ Body:
 ## Login with Existing User Credentials
 
 **Method**: POST
+
 **Endpoint**:api/user/login
+
 **Description**: Login with existing user credentials.
 
 ### Request
@@ -46,7 +50,9 @@ Body:
 ## Create a New Category
 
 **Method**: POST
+
 **Endpoint**: /api/category/add
+
 **Description**: Create a new product category.
 
 ### Request
@@ -67,7 +73,9 @@ Body:
 ## Get All Categories
 
 **Method**: GET
+
 **Endpoint**: /api/category
+
 **Description**: Get a list of all product categories.
 
 ### Request
@@ -93,7 +101,9 @@ No request body is required for this endpoint.
  ## Create a New Product
 
 **Method**: POST
+
 **Endpoint**: /api/product/add
+
 **Description**: Create a new product.
 
 ### Request
@@ -117,7 +127,9 @@ Body:
 ## Get Products by Category
 
 **Method**: GET
+
 **Endpoint**: /api/category/:categoryId
+
 **Description**: Get all products under a specific category.
 
 ### Request
@@ -151,7 +163,9 @@ No request body is required for this endpoint.
 ## Get Product by ID
 
 **Method**: GET
+
 **Endpoint**: /api/product/product/:productId
+
 **Description**: Get a specific product by its ID.
 
 ### Request
@@ -174,7 +188,9 @@ No request body is required for this endpoint.
 ## Get Cart by User ID
 
 **Method**: GET
+
 **Endpoint**: /api/cart/cartData
+
 **Description**: Get all data from the user's cart.
 
 ### Request
@@ -202,7 +218,9 @@ No request body is required for this endpoint.
 ## Add Product to Cart
 
 **Method**: POST
+
 **Endpoint**: /api/cart/add
+
 **Description**: Add a product to the cart.
 
 ### Request
@@ -218,7 +236,9 @@ No request body is required for this endpoint.
 ## Update Cart Item Quantity
 
 **Method**: PATCH
+
 **Endpoint**: /api/cart/update/:productId
+
 **Description**: Update the quantity of a product in the cart.
 
 ### Request
@@ -231,7 +251,9 @@ No request body is required for this endpoint.
 ## Delete Cart Item
 
 **Method**: DELETE
+
 **Endpoint**: /api/cart/delete/:productId
+
 **Description**: Delete an item from the cart.
 
 ### Request
@@ -249,7 +271,9 @@ No request body is required for this endpoint.
 ## Place an Order
 
 **Method**: POST
+
 **Endpoint**: /api/order/:productId
+
 **Description**: Place an order for a specific product.
 
 ### Request
@@ -267,7 +291,9 @@ No request body is required for this endpoint.
 ## Get Order History
 
 **Method**: GET
+
 **Endpoint**: /api/order/orders/history
+
 **Description**: Get the order history for the authenticated user.
 
 ### Request
@@ -299,7 +325,9 @@ No request body is required for this endpoint.
 ## Get Order Details by ID
 
 **Method**: GET
+
 **Endpoint**: /api/order/:orderId
+
 **Description**: Get detailed information of a specific order by its ID.
 
 ### Request
