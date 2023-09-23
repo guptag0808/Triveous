@@ -1,3 +1,6 @@
+
+#The server is running at local host 3000
+
 ## Register a New User
 
 **Method**: POST
