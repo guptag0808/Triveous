@@ -1,6 +1,7 @@
 const express = require('express');
 const cartRouter = express.Router();
 const {CartModel} = require('../model/cartModel');
+const {ProductModel} = require("../model/productModel")
 const {authentication} = require('../middleware/authentication')
 
 // Add a product to the cart
@@ -9,7 +10,9 @@ cartRouter.post('/add', async (req, res) => {
    
   try {
     let cart = await CartModel.findOne({ userId });
-     
+     const product = await ProductModel.findById({_id:productId})
+	 const price = product.price
+	 
     if (!cart) {
       cart = new CartModel({ userId, items: [] });
 	  
@@ -21,8 +24,7 @@ cartRouter.post('/add', async (req, res) => {
       // Update quantity if the product is already in the cart
       existingItem.quantity += quantity;
     } else {
-      // Add a new item to the cart
-      cart.items.push({ productId, quantity });
+      cart.items.push({ productId, quantity,price });
     }
 
     await cart.save();

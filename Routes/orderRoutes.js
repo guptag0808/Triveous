@@ -1,15 +1,15 @@
 // routes/orderRoutes.js
 const express = require('express');
-const router = express.Router();
-const Order = require('../models/Order');
-const Cart = require('../models/Cart');
+const orderRouter = express.Router();
+const {OrderModel} = require('../model/orderModel');
+const {CartModel} = require('../model/cartModel');
 
 // Route to place an order
-router.post('/orders/place', async (req, res) => {
-  const userId = req.body.userId; // Assuming you have user authentication
+orderRouter.post('/place', async (req, res) => {
+  const userId = req.body.userId; 
   try {
-    // Get the user's cart
-    const cart = await Cart.findOne({ userId });
+    
+    const cart = await CartModel.findOne({ userId });
 
     if (!cart) {
       return res.status(404).json({ error: 'Cart not found' });
@@ -19,7 +19,7 @@ router.post('/orders/place', async (req, res) => {
     const total = cart.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     // Create a new order based on the cart contents
-    const order = new Order({
+    const order = new OrderModel({
       userId,
       items: cart.items.map(item => ({
         productId: item.productId,
@@ -38,8 +38,9 @@ router.post('/orders/place', async (req, res) => {
 
     res.json(order);
   } catch (error) {
+     console.log(error.message)
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-module.exports = router;
+module.exports = {orderRouter};
